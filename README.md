@@ -2,6 +2,8 @@
 
 Source plugin for [Netlify's API](https://www.netlify.com/docs/api/).
 
+_**Please Note:** This plugin was initially created to deliver data for my [dashboard](https://status.lekoarts.de/) and hence only queries the user and sites. If you need more functionality, I'd be happy to review your PR and merge it into this plugin!_
+
 ## Install
 
 ```shell
