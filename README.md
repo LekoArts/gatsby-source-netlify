@@ -30,13 +30,13 @@ Add the plugin and define the API key.
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-netlify',
+      resolve: "gatsby-source-netlify",
       options: {
-        apiKey: process.env.NETLIFY_KEY,
+        apiKey: process.env.NETLIFY_KEY
       }
     }
   ]
-}
+};
 ```
 
 #### Options
@@ -47,19 +47,19 @@ As per [netlify/js-client](https://github.com/netlify/js-client#api) you can als
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-netlify',
+      resolve: "gatsby-source-netlify",
       options: {
         apiKey: process.env.NETLIFY_KEY,
         opts: {
-          userAgent: 'netlify/js-client',
-          scheme: 'https',
-          host: 'api.netlify.com',
-          pathPrefix: '/api/v1',
+          userAgent: "netlify/js-client",
+          scheme: "https",
+          host: "api.netlify.com",
+          pathPrefix: "/api/v1",
           globalParams: {} // parameters you want available for every request.
           // Global params are only sent of the open-api spec specifies the provided params.
         }
       }
     }
   ]
-}
+};
 ```
