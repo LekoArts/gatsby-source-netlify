@@ -1,10 +1,10 @@
 const NetlifyAPI = require('netlify')
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, { apiKey, opts = {} }) => {
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, reporter }, { apiKey, opts = {} }) => {
   const { createNode } = actions
 
   if (!apiKey) {
-    throw new Error('Please define an access token')
+    reporter.panicOnBuild('Please define a Netlify access token')
   }
 
   const client = new NetlifyAPI(apiKey, opts)
