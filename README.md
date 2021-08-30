@@ -2,12 +2,12 @@
 
 Source plugin for [Netlify's API](https://www.netlify.com/docs/api/).
 
-_**Please Note:** This plugin was initially created to deliver data for my [dashboard](https://status.lekoarts.de/) and hence only queries the user and sites. If you need more functionality, I'd be happy to review your PR and merge it into this plugin!_
+_**Please Note:** This plugin was initially created to deliver data for my [dashboard](https://github.com/LekoArts/gatsby-themes/tree/master/themes/gatsby-theme-status-dashboard) and hence only queries the user and sites. If you need more functionality, I'd be happy to review your PR and merge it into this plugin!_
 
 ## Install
 
 ```shell
-npm install --save gatsby-source-netlify
+npm install gatsby-source-netlify
 ```
 
 ## How to use
@@ -22,20 +22,22 @@ Save the API key in an environment file like:
 NETLIFY_KEY=your-access-token-here
 ```
 
-### gatsby-config
+### gatsby-config.js
 
 Add the plugin and define the API key.
 
 ```js
+require("dotenv").config();
+
 module.exports = {
   plugins: [
     {
       resolve: "gatsby-source-netlify",
       options: {
-        apiKey: process.env.NETLIFY_KEY
-      }
-    }
-  ]
+        apiKey: process.env.NETLIFY_KEY,
+      },
+    },
+  ],
 };
 ```
 
@@ -55,11 +57,11 @@ module.exports = {
           scheme: "https",
           host: "api.netlify.com",
           pathPrefix: "/api/v1",
-          globalParams: {} // parameters you want available for every request.
+          globalParams: {}, // parameters you want available for every request.
           // Global params are only sent of the open-api spec specifies the provided params.
-        }
-      }
-    }
-  ]
+        },
+      },
+    },
+  ],
 };
 ```

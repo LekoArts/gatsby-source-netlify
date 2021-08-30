@@ -1,11 +1,13 @@
 const NetlifyAPI = require('netlify')
 
+exports.pluginOptionsSchema = ({ Joi }) =>
+  Joi.object({
+    apiKey: Joi.string().required().description('Your Netlify access token'),
+    opts: Joi.object().description('The optional options you can pass to the Netlify Instance'),
+  })
+
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, reporter }, { apiKey, opts = {} }) => {
   const { createNode } = actions
-
-  if (!apiKey) {
-    reporter.panicOnBuild('Please define a Netlify access token')
-  }
 
   const client = new NetlifyAPI(apiKey, opts)
 
@@ -32,10 +34,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, repor
     const sites = await client.listSites()
     const user = await client.getCurrentUser()
 
-    sites.forEach(site => nodeHelper(site, 'Sites'))
+    sites.forEach((site) => nodeHelper(site, 'Sites'))
     nodeHelper(user, 'User')
   } catch (e) {
-    console.error(e)
-    process.exit(1)
+    reporter.panicOnBuild(`Error creating the nodes for gatsby-source-netlify`, e)
   }
 }
